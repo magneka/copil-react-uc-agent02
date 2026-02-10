@@ -62,6 +62,35 @@ Also install the following as dev dependencies for linting and formatting:
 npm install -D eslint prettier eslint-config-prettier eslint-plugin-react eslint-plugin-react-hooks @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
+## Redux Store Setup
+
+After installing all dependencies, create the Redux store with a default `hello` slice.
+
+Copy the template files from `templates/store/` into `src/store/`:
+
+```
+mkdir src/store
+cp .github/agents/uc-react/templates/store/* src/store/
+```
+
+This creates:
+
+| File | Purpose |
+|------|---------|
+| `src/store/helloSlice.ts` | Default slice with `message` state and `setMessage` reducer |
+| `src/store/index.ts` | `configureStore` with typed `RootState` and `AppDispatch` |
+| `src/store/hooks.ts` | Typed `useAppDispatch` and `useAppSelector` hooks |
+
+Then **wrap the app with the Redux Provider** — In `src/main.tsx`, import the store and `Provider`, and wrap `<App />`:
+
+```tsx
+import { Provider } from 'react-redux';
+import { store } from './store';
+
+// wrap <App /> like:
+// <Provider store={store}><App /></Provider>
+```
+
 ## Page Layout & Styling
 
 See [uc-layout.md](uc-layout.md) for all layout and styling specifications.
@@ -88,6 +117,30 @@ These assets are referenced by components in the layout spec and must be present
 | `Group-9748.svg` | Service icon — Prosjektledelse |
 | `*.webp` | Employee photos (contact section) |
 
+## Dev Scripts
+
+Copy the helper scripts from `templates/scripts/` into the project root:
+
+```
+cp .github/agents/uc-react/templates/scripts/* .
+```
+
+This provides both Bash (`.sh`) and PowerShell (`.ps1`) versions:
+
+| Script | Purpose |
+|--------|---------|
+| `start-dev.sh` / `start-dev.ps1` | Start the Vite dev server in the background, saves PID to `.dev-server.pid` |
+| `build.sh` / `build.ps1` | Production build (outputs to `dist/`) |
+| `stop-dev.sh` / `stop-dev.ps1` | Stop the running dev server using the saved PID |
+
+Make the Bash scripts executable:
+
+```
+chmod +x start-dev.sh build.sh stop-dev.sh
+```
+
+Add `.dev-server.pid` to `.gitignore`.
+
 ## Constraints
 
 - Do **not** add any dependencies beyond what the Vite template provides and what is listed in the **Additional Dependencies** section above.
@@ -103,3 +156,7 @@ After completing the steps, briefly confirm:
 - The project was scaffolded with Vite + React + TypeScript
 - Dependencies were installed
 - How to start the dev server (`npm run dev`)
+
+## Handoff
+
+Once all steps above are complete (scaffolding, dependencies, asset copy, and verification), **immediately** hand off to the [uc-layout.md](uc-layout.md) agent to generate the full UC site layout, components, and styles. Do not wait for user confirmation — proceed directly.
