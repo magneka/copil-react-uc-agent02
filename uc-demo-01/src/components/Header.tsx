@@ -18,6 +18,7 @@ export default function Header() {
             <li><NavLink to="/om-oss"><span>Om oss</span></NavLink></li>
             <li><NavLink to="/learniken"><span>Learniken</span></NavLink></li>
             <li><NavLink to="/kontakt"><span>Kontakt</span></NavLink></li>
+            <li><NavLink to="/contacts"><span>Kontakter</span></NavLink></li>
           </ul>
         </nav>
       </div>
